@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D7C1173244FFADA009FAEF2 /* EditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7C1172244FFADA009FAEF2 /* EditController.swift */; };
 		3D9B06EE244FD3FD00CFD4C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B06ED244FD3FD00CFD4C6 /* AppDelegate.swift */; };
 		3D9B06F0244FD3FD00CFD4C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B06EF244FD3FD00CFD4C6 /* SceneDelegate.swift */; };
-		3D9B06F2244FD3FD00CFD4C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B06F1244FD3FD00CFD4C6 /* ViewController.swift */; };
 		3D9B06F5244FD3FD00CFD4C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B06F3244FD3FD00CFD4C6 /* Main.storyboard */; };
 		3D9B06F7244FD3FE00CFD4C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B06F6244FD3FE00CFD4C6 /* Assets.xcassets */; };
 		3D9B06FA244FD3FE00CFD4C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D9B06F8244FD3FE00CFD4C6 /* LaunchScreen.storyboard */; };
+		3D9B0702244FD4BD00CFD4C6 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B0701244FD4BD00CFD4C6 /* ToDoController.swift */; };
+		3D9B0707244FD94C00CFD4C6 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B0706244FD94C00CFD4C6 /* ToDoCell.swift */; };
+		3D9B0709244FDE6800CFD4C6 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B0708244FDE6800CFD4C6 /* ToDo.swift */; };
+		3DDC7B402450C9E10067ED56 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC7B3F2450C9E10067ED56 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D7C1172244FFADA009FAEF2 /* EditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditController.swift; sourceTree = "<group>"; };
 		3D9B06EA244FD3FD00CFD4C6 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9B06ED244FD3FD00CFD4C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D9B06EF244FD3FD00CFD4C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3D9B06F1244FD3FD00CFD4C6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3D9B06F4244FD3FD00CFD4C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3D9B06F6244FD3FE00CFD4C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D9B06F9244FD3FE00CFD4C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3D9B06FB244FD3FE00CFD4C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3D9B0701244FD4BD00CFD4C6 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
+		3D9B0706244FD94C00CFD4C6 /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
+		3D9B0708244FDE6800CFD4C6 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
+		3DDC7B3F2450C9E10067ED56 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,43 @@
 		3D9B06EC244FD3FD00CFD4C6 /* ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				3D9B06ED244FD3FD00CFD4C6 /* AppDelegate.swift */,
+				3D9B0705244FD4EB00CFD4C6 /* Model */,
+				3D9B0703244FD4C600CFD4C6 /* Controller */,
 				3D9B06EF244FD3FD00CFD4C6 /* SceneDelegate.swift */,
-				3D9B06F1244FD3FD00CFD4C6 /* ViewController.swift */,
-				3D9B06F3244FD3FD00CFD4C6 /* Main.storyboard */,
+				3D9B0704244FD4DA00CFD4C6 /* View */,
 				3D9B06F6244FD3FE00CFD4C6 /* Assets.xcassets */,
-				3D9B06F8244FD3FE00CFD4C6 /* LaunchScreen.storyboard */,
 				3D9B06FB244FD3FE00CFD4C6 /* Info.plist */,
 			);
 			path = ToDoList;
+			sourceTree = "<group>";
+		};
+		3D9B0703244FD4C600CFD4C6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3D9B06ED244FD3FD00CFD4C6 /* AppDelegate.swift */,
+				3D9B0701244FD4BD00CFD4C6 /* ToDoController.swift */,
+				3D9B0706244FD94C00CFD4C6 /* ToDoCell.swift */,
+				3D7C1172244FFADA009FAEF2 /* EditController.swift */,
+				3DDC7B3F2450C9E10067ED56 /* TableViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3D9B0704244FD4DA00CFD4C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3D9B06F3244FD3FD00CFD4C6 /* Main.storyboard */,
+				3D9B06F8244FD3FE00CFD4C6 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3D9B0705244FD4EB00CFD4C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3D9B0708244FDE6800CFD4C6 /* ToDo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +174,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D9B06F2244FD3FD00CFD4C6 /* ViewController.swift in Sources */,
 				3D9B06EE244FD3FD00CFD4C6 /* AppDelegate.swift in Sources */,
+				3DDC7B402450C9E10067ED56 /* TableViewController.swift in Sources */,
+				3D7C1173244FFADA009FAEF2 /* EditController.swift in Sources */,
+				3D9B0709244FDE6800CFD4C6 /* ToDo.swift in Sources */,
 				3D9B06F0244FD3FD00CFD4C6 /* SceneDelegate.swift in Sources */,
+				3D9B0702244FD4BD00CFD4C6 /* ToDoController.swift in Sources */,
+				3D9B0707244FD94C00CFD4C6 /* ToDoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
