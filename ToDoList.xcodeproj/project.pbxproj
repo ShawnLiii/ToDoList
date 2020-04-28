@@ -16,7 +16,6 @@
 		3D9B0702244FD4BD00CFD4C6 /* ToDoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B0701244FD4BD00CFD4C6 /* ToDoController.swift */; };
 		3D9B0707244FD94C00CFD4C6 /* ToDoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B0706244FD94C00CFD4C6 /* ToDoCell.swift */; };
 		3D9B0709244FDE6800CFD4C6 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9B0708244FDE6800CFD4C6 /* ToDo.swift */; };
-		3DDC7B402450C9E10067ED56 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC7B3F2450C9E10067ED56 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		3D9B0701244FD4BD00CFD4C6 /* ToDoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoController.swift; sourceTree = "<group>"; };
 		3D9B0706244FD94C00CFD4C6 /* ToDoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCell.swift; sourceTree = "<group>"; };
 		3D9B0708244FDE6800CFD4C6 /* ToDo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
-		3DDC7B3F2450C9E10067ED56 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 				3D9B0701244FD4BD00CFD4C6 /* ToDoController.swift */,
 				3D9B0706244FD94C00CFD4C6 /* ToDoCell.swift */,
 				3D7C1172244FFADA009FAEF2 /* EditController.swift */,
-				3DDC7B3F2450C9E10067ED56 /* TableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -175,7 +172,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D9B06EE244FD3FD00CFD4C6 /* AppDelegate.swift in Sources */,
-				3DDC7B402450C9E10067ED56 /* TableViewController.swift in Sources */,
 				3D7C1173244FFADA009FAEF2 /* EditController.swift in Sources */,
 				3D9B0709244FDE6800CFD4C6 /* ToDo.swift in Sources */,
 				3D9B06F0244FD3FD00CFD4C6 /* SceneDelegate.swift in Sources */,

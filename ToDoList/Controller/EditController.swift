@@ -26,11 +26,11 @@ class EditController: UITableViewController
         {
             if self.name != nil
             {
-                delegate?.Edit(name: name, detail: inputDetail.text)
+                delegate?.edit(name: name, detail: inputDetail.text)
             }
             else
             {
-              delegate?.Add(name: name, detail: inputDetail.text)
+              delegate?.add(name: name, detail: inputDetail.text)
             }
           
         }

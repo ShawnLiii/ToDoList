@@ -12,26 +12,7 @@ import UIKit
 class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDelegate
 {
      
-    var todos: [[ToDo]] = [
-        [ToDo(name:"Study Swift", checked: false, details: "I will study Swift all day long"),
-         ToDo(name:"Prepare Exam", checked: false, details: "I should prepare for the first evaluation on Friday"),
-         ToDo(name:"Hit Exercise", checked: false, details: "Need to do more exercise to keep health, Fucking COVID-19"),
-         ToDo(name:"Making Food", checked: false, details: "Make some healthy food as well"),
-         ToDo(name:"Making Food2", checked: false, details: "Make some healthy food as well"),
-         ToDo(name:"Making Food3", checked: false, details: "Make some healthy food as well"),
-         ToDo(name:"Making Food4", checked: false, details: "Make some healthy food as well"),
-         ToDo(name:"Hit Exercise", checked: false, details: "Need to do more exercise to keep health, Fucking COVID-19"),
-         ToDo(name:"Hit Exercise", checked: false, details: "Need to do more exercise to keep health, Fucking COVID-19"),
-         ToDo(name:"Hit Exercise", checked: false, details: "Need to do more exercise to keep health, Fucking COVID-19"),
-        ],
-        [ToDo(name: "Hold a concert", checked: true, details: "I want to hold 32 concerts"),
-        ToDo(name: "Find a girlfriend", checked: true, details: "I want a girl fiend"),
-        ToDo(name: "GPA 4.0", checked: true, details: "It's easy"),
-        ToDo(name: "GPA 4.0", checked: true, details: "It's easy"),
-        ToDo(name: "GPA 4.0", checked: true, details: "It's easy"),
-        ToDo(name: "GPA 4.0", checked: true, details: "It's easy"),
-        ToDo(name: "GPA 4.0", checked: true, details: "It's easy")]
-    ]
+    var todos: [[ToDo]] = todo
     var row = 0
     var column = 0
     
@@ -43,11 +24,13 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
     
         if let indexPaths = tableView.indexPathsForSelectedRows
         {
-            for indexPath in indexPaths
+            //
+            for indexPath in indexPaths.reversed()
             {
                 todos[indexPath.section].remove(at: indexPath.row)
             }
-        
+            
+          saveData()
 //        Update View
             tableView.beginUpdates()
             tableView.deleteRows(at: indexPaths, with: .automatic)
@@ -56,12 +39,8 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
     }
     override func viewDidLoad()
     {
-//        super.viewDidLoad()
-//        Uncomment the following line to preserve selection between presentations
-//        self.clearsSelectionOnViewWillAppear = false
-//
-//        Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        encodeData()
     }
 //     Action of Edit button
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -100,12 +79,6 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         // Configure the cell...
         cell.checkMark.text = todos[indexPath.section][indexPath.row].checked ? "✓" : ""
         cell.todo.text = todos[indexPath.section][indexPath.row].name
-        
-        //hard code to change cell style for each section
-//        if (indexPath.section == 0)
-//        {
-//            cell.backgroundColor = .gray
-//        }
         return cell
     }
     
@@ -117,6 +90,7 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         {
             //change data
             todos[indexPath.section][indexPath.row].checked = !todos[indexPath.section][indexPath.row].checked
+            saveData()
             //change view
             let cell = tableView.cellForRow(at: indexPath) as! ToDoCell
             cell.checkMark.text = todos[indexPath.section][indexPath.row].checked ? "✓" : ""
@@ -173,32 +147,25 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         let alertController = UIAlertController(title: "Awesome Bro", message: "This is Your To Do List", preferredStyle: .alert)
 //         Initialize Actions
         let yesAction = UIAlertAction(title: "Got It", style: .default) { (action) -> Void in NSLog("The \"Got It\" alert occured.")}
-//        let noAction = UIAlertAction(title: "Back", style: .default) { (action) -> Void in NSLog("The \"Not OK\" alert occured.")}
 //         Add Actions
         alertController.addAction(yesAction)
-//        alertController.addAction(noAction)
 //         Present Alert Controller
         self.present(alertController, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-//         Get the new view controller using segue.destination.
-//         Pass the selected object data to the new view controller.
-        if segue.identifier == "addTask"
+
+        let vc = segue.destination as! EditController
+        vc.delegate = self
+        
+        if segue.identifier == "editTask"
         {
-            let vc = segue.destination as! EditController
-            vc.delegate = self
-        }
-        else if segue.identifier == "editTask"
-        {
-            let vc = segue.destination as! EditController
             let cell = sender as! ToDoCell
             row = tableView.indexPath(for: cell)!.row
             column = tableView.indexPath(for: cell)!.section
             vc.name = todos[column][row].name
             vc.detail = todos[column][row].details
-            vc.delegate = self
         }
     }
     
@@ -209,17 +176,15 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         {
             // Delete the data
             todos[indexPath.section].remove(at: indexPath.row)
+            saveData()
             // Update View: Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
-//        else if editingStyle == .insert
-//        {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
     }
     
     // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath)
+    {
 //      Move data
         let todo = todos[fromIndexPath.section][fromIndexPath.row]
         todos[fromIndexPath.section].remove(at: fromIndexPath.row)
@@ -228,39 +193,73 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         {
             todos[to.section].insert(todo, at: to.row)
             //        Update View
-            tableView.beginUpdates()
-//          tableView.moveSection(fromIndexPath.section, toSection: to.section)
-            tableView.moveRow(at: fromIndexPath, to: to)
-            tableView.endUpdates()
+//            tableView.beginUpdates()
+//            tableView.moveRow(at: fromIndexPath, to: to)
+//            tableView.endUpdates()
+            tableView.reloadData()
         }
         else
         {
             todos[fromIndexPath.section].insert(todo, at: to.row)
             //        Update View
-            tableView.beginUpdates()
-            tableView.moveRow(at: fromIndexPath, to: to)
-            tableView.endUpdates()
+//            tableView.beginUpdates()
+//            tableView.moveRow(at: fromIndexPath, to: to)
+//            tableView.endUpdates()
+            tableView.reloadData()
         }
         
     }
     
-    func Add(name: String, detail: String)
+    func add(name: String, detail: String)
     {
 //        Add data
         todos[0].append(ToDo(name: name, checked: false, details: detail))
+//        Store data into local 
+        saveData()
 //        Update view
         let indexPath = IndexPath(row: todos[0].count - 1, section: 0 )
         tableView.insertRows(at: [indexPath] , with: .automatic)
     }
    
-    func Edit(name: String, detail: String)
+    func edit(name: String, detail: String)
     {
 //        Edit Data
         todos[column][row].name = name
         todos[column][row].details = detail
+//        Store data into local
+        saveData()
 //        Update View
         let indexPath = IndexPath(row: row, section: column)
         let cell = tableView.cellForRow(at: indexPath) as! ToDoCell
         cell.todo.text = name
+    }
+    
+    func saveData()
+    {
+        do
+        {
+            // Create an Encoder and Encode data
+            let data = try JSONEncoder().encode(todos)
+            UserDefaults.standard.set(data, forKey: "todos")
+        }
+        catch
+        {
+            print(error)
+        }
+    }
+    
+    func encodeData()
+    {
+        if let data = UserDefaults.standard.data(forKey: "todos")
+        {
+            do
+            {
+                todos = try JSONDecoder().decode([[ToDo]].self, from: data)
+            }
+            catch
+            {
+                print(error)
+            }
+        }
     }
 }
