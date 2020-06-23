@@ -7,12 +7,14 @@
 //
 
 import UIKit
-
+import RealmSwift
 
 class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDelegate
 {
-     
-    var todos: [[ToDo]] = todo
+    let realm = try! Realm()
+    
+//    var todos: [[ToDo]] = [[]]
+    var todos: Array<Results<ToDo>?>?
     var row = 0
     var column = 0
     
@@ -30,7 +32,7 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
                 todos[indexPath.section].remove(at: indexPath.row)
             }
             
-          saveData()
+//          saveData()
 //        Update View
             tableView.beginUpdates()
             tableView.deleteRows(at: indexPaths, with: .automatic)
@@ -40,7 +42,8 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
     override func viewDidLoad()
     {
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        encodeData()
+       // read data from realm
+        realm.objects(ToDo.self)
     }
 //     Action of Edit button
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -62,7 +65,7 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
     override func numberOfSections(in tableView: UITableView) -> Int
     {
         // #warning Incomplete implementation, return the number of sections
-        return todos.count
+        return todos?.count ?? 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -90,7 +93,7 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         {
             //change data
             todos[indexPath.section][indexPath.row].checked = !todos[indexPath.section][indexPath.row].checked
-            saveData()
+//            saveData()
             //change view
             let cell = tableView.cellForRow(at: indexPath) as! ToDoCell
             cell.checkMark.text = todos[indexPath.section][indexPath.row].checked ? "✓" : ""
@@ -176,7 +179,7 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         {
             // Delete the data
             todos[indexPath.section].remove(at: indexPath.row)
-            saveData()
+//            saveData()
             // Update View: Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -213,9 +216,12 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
     func add(name: String, detail: String)
     {
 //        Add data
-        todos[0].append(ToDo(name: name, checked: false, details: detail))
+       let todo = ToDo()
+        todo.name = name
+        todo.details = detail
+        todos[0].append(todo)
 //        Store data into local 
-        saveData()
+        saveData(todo: todo)
 //        Update view
         let indexPath = IndexPath(row: todos[0].count - 1, section: 0 )
         tableView.insertRows(at: [indexPath] , with: .automatic)
@@ -227,39 +233,23 @@ class ToDoController: UITableViewController, EditDelegate, UIGestureRecognizerDe
         todos[column][row].name = name
         todos[column][row].details = detail
 //        Store data into local
-        saveData()
+//        saveData()
 //        Update View
         let indexPath = IndexPath(row: row, section: column)
         let cell = tableView.cellForRow(at: indexPath) as! ToDoCell
         cell.todo.text = name
     }
     
-    func saveData()
+    func saveData(todo: ToDo)
     {
-        do
-        {
-            // Create an Encoder and Encode data
-            let data = try JSONEncoder().encode(todos)
-            UserDefaults.standard.set(data, forKey: "todos")
-        }
-        catch
-        {
+        do {
+            try realm.write{
+                realm.add(todo)
+            }
+        } catch  {
             print(error)
         }
     }
     
-    func encodeData()
-    {
-        if let data = UserDefaults.standard.data(forKey: "todos")
-        {
-            do
-            {
-                todos = try JSONDecoder().decode([[ToDo]].self, from: data)
-            }
-            catch
-            {
-                print(error)
-            }
-        }
-    }
+    
 }
